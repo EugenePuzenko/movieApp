@@ -43,6 +43,8 @@ export default class App extends React.Component {
         this.updateMovie(e.target.value);
       }
     }, 300);
+
+    this.inputRef = React.createRef();
   }
 
   componentDidMount() {
@@ -53,6 +55,8 @@ export default class App extends React.Component {
     window.addEventListener('online', () => {
       this.isOnline();
     });
+
+    this.inputRef.current.focus();
   }
 
   onCardError() {
@@ -193,7 +197,7 @@ export default class App extends React.Component {
           <TabPane tab="Search" key="1">
             <Row>
               <Col className="gutter-row" span={14} offset={5}>
-                <Input placeholder="Type to search..." onChange={this.search} />
+                <Input placeholder="Type to search..." onChange={this.search} ref={this.inputRef} />
                 {requestErrorMessage}
                 <List
                   pagination={{
