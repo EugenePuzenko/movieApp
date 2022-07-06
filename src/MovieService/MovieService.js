@@ -14,7 +14,7 @@ class MovieService {
     );
 
     if (!res.ok) {
-      throw new Error(`Request to ${baseURL} was rejected. Status: ${res.status}`);
+      throw new Error(`Request to ${this.url} was rejected. Status: ${res.status}`);
     }
 
     const body = await res.json();
@@ -26,7 +26,7 @@ class MovieService {
       const res = await fetch(`https://image.tmdb.org/t/p/w500${path}`);
 
       if (!res.ok) {
-        throw new Error(`Request to ${baseURL} was rejected. Status: ${res.status}`);
+        throw new Error(`Request to ${this.url} was rejected. Status: ${res.status}`);
       }
 
       const img = await res.url;
@@ -40,7 +40,7 @@ class MovieService {
     const res = await fetch(`${baseURL}genre/movie/list?api_key=${API_KEY}&language=en-US`);
 
     if (!res.ok) {
-      throw new Error(`Request to ${baseURL} was rejected. Status: ${res.status}`);
+      throw new Error(`Request to ${this.url} was rejected. Status: ${res.status}`);
     }
 
     const list = await res.json();
