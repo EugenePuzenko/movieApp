@@ -2,7 +2,7 @@ import { Spin, Card, Rate } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Consumer } from '../MovieServiceContext';
+import { Consumer } from '../MovieServiceContext/MovieServiceContext';
 import { getRateColor } from '../helpers';
 
 const { Meta } = Card;
@@ -26,7 +26,7 @@ const MovieCard = ({ movie, onImgLoaded, onRate }) => {
             <Card
               className="movie-card"
               hoverable
-              cover={<img onLoad={onImgLoaded} alt="movie poster" src={movie.poster} />}
+              cover={<img onLoad={() => onImgLoaded(movie.id)} alt="movie poster" src={movie.poster} />}
             >
               <div className="title-wrapper">
                 <Meta title={movie.title} description={movie.release_date} />

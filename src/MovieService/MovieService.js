@@ -1,15 +1,16 @@
-import posterNotFound from './moviePosterNotFound.jpg';
+import posterNotFound from '../moviePosterNotFound.jpg';
 
-export default class MovieService {
-  requestHeaders = {
-    method: 'GET',
-    redirect: 'follow',
-  };
+const baseURL = 'https://api.themoviedb.org/3/';
+const API_KEY = process.env.REACT_APP_KEY;
 
+class MovieService {
   async getResource(name, page) {
     const res = await fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=cb1f3214193c8c6eefeff82353c05087&language=en-US&query=${name}&page=${page}&include_adult=false`,
-      this.requestHeaders
+      `${baseURL}search/movie?api_key=${API_KEY}&language=en-US&query=${name}&page=${page}&include_adult=false`,
+      {
+        method: 'GET',
+        redirect: 'follow',
+      }
     );
 
     if (!res.ok) {
@@ -36,16 +37,15 @@ export default class MovieService {
   }
 
   async getGenres() {
-    const res = await fetch(
-      'https://api.themoviedb.org/3/genre/movie/list?api_key=cb1f3214193c8c6eefeff82353c05087&language=en-US'
-    );
+    const res = await fetch(`${baseURL}genre/movie/list?api_key=${API_KEY}&language=en-US`);
 
     if (!res.ok) {
       throw new Error(`Request to ${this.url} was rejected. Status: ${res.status}`);
     }
 
     const list = await res.json();
-
     return list.genres;
   }
 }
+
+export const { getResource, getPoster, getGenres } = new MovieService();
