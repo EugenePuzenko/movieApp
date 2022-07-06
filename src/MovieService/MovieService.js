@@ -1,12 +1,11 @@
 import posterNotFound from '../moviePosterNotFound.jpg';
 
 const baseURL = 'https://api.themoviedb.org/3/';
-const API_KEY = process.env.REACT_APP_KEY;
 
 class MovieService {
   async getResource(name, page) {
     const res = await fetch(
-      `${baseURL}search/movie?api_key=${API_KEY}&language=en-US&query=${name}&page=${page}&include_adult=false`,
+      `${baseURL}search/movie?api_key=${process.env.REACT_APP_KEY}&language=en-US&query=${name}&page=${page}&include_adult=false`,
       {
         method: 'GET',
         redirect: 'follow',
@@ -37,7 +36,7 @@ class MovieService {
   }
 
   async getGenres() {
-    const res = await fetch(`${baseURL}genre/movie/list?api_key=${API_KEY}&language=en-US`);
+    const res = await fetch(`${baseURL}genre/movie/list?api_key=${process.env.REACT_APP_KEY}&language=en-US`);
 
     if (!res.ok) {
       throw new Error(`Request to ${this.url} was rejected. Status: ${res.status}`);
