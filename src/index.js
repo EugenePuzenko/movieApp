@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 
 import App from './components/App';
 
